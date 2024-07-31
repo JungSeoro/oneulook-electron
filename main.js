@@ -6,16 +6,18 @@ function createWindow() {
     width: 800,
     height: 600,
     webPreferences: {
-      nodeIntegration: false,
-      contextIsolation: true, 
+      preload: path.join(__dirname, 'preload.js'),
+      nodeIntegration: true,
+      contextIsolation: false, 
     },
   });
 
-  // HTML 파일 로드
-  win.loadFile('index.html');
+  // win.loadFile('index.html');
+  win.loadURL('https://brand.nmodelin.com')
 }
 
-app.on('ready', createWindow);
+// app.on('ready', createWindow);
+app.whenReady().then(createWindow);
 
 app.on('window-all-closed', () => {
   if (process.platform !== 'darwin') {
